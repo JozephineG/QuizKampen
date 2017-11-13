@@ -13,7 +13,7 @@ public class Quizkampen {
         
         GUIquiz quiz = new GUIquiz();
 
-//        Vill bara se om den här skiten äntligen faktiskt kan funka /Joel 
+//        Woho	 /Joel 
     }
     
 }
