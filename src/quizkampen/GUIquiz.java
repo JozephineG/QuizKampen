@@ -14,25 +14,25 @@ public class GUIquiz extends JFrame implements ActionListener {
     
     JPanel spelyta = new JPanel();
     JPanel knappyta = new JPanel();
-    JLabel fr√•ga = new JLabel("", SwingConstants.CENTER);
+    JLabel frÂga = new JLabel("", SwingConstants.CENTER);
     
     JButton[][] bArray = new JButton[2][2];
     
-    int[] fr√•garray = {1, 2, 3, 4};
+    int[] frÂgarray = {1, 2, 3, 4};
     
     int r;
     int k;
-    int r√§ttr;
-    int r√§ttk;
+    int r‰ttr;
+    int r‰ttk;
     
     
     public GUIquiz(){
         
         add(spelyta);
         spelyta.setLayout(new GridLayout(2, 1));
-        fr√•ga.setText("F√∂rsta bokstaven i alfabetet?");
-        fr√•ga.setFont(new Font("Serif", Font.BOLD, 18));
-        spelyta.add(fr√•ga);
+        frÂga.setText("Fˆrsta bokstaven i alfabetet?");
+        frÂga.setFont(new Font("Serif", Font.BOLD, 18));
+        spelyta.add(frÂga);
         spelyta.add(knappyta);
         knappyta.setLayout(new GridLayout(2, 2));
         
@@ -58,36 +58,36 @@ public class GUIquiz extends JFrame implements ActionListener {
         
     }
     
-    public boolean r√§ttellerfel(int rad, int kolumn){
+    public boolean r‰ttellerfel(int rad, int kolumn){
         
-        boolean r√§tt = false;
-        r√§ttr = 2;
-        r√§ttk = 2;
+        boolean r‰tt = false;
+        r‰ttr = 2;
+        r‰ttk = 2;
         
-        switch (fr√•garray[0]) {
-            case 1: r√§ttr = 0;
-                    r√§ttk = 0;
+        switch (frÂgarray[0]) {
+            case 1: r‰ttr = 0;
+                    r‰ttk = 0;
                     break;
-            case 2: r√§ttr = 1;
-                    r√§ttk = 1;
+            case 2: r‰ttr = 1;
+                    r‰ttk = 1;
                     break;
-            case 3: r√§ttr = 0;
-                    r√§ttk = 1;
+            case 3: r‰ttr = 0;
+                    r‰ttk = 1;
                     break;
-            case 4: r√§ttr = 1;
-                    r√§ttk = 0;
+            case 4: r‰ttr = 1;
+                    r‰ttk = 0;
                     break;
         }
                      
                      
-        if(rad == r√§ttr && kolumn == r√§ttk){
+        if(rad == r‰ttr && kolumn == r‰ttk){
             System.out.println(rad + " " + kolumn + "true");
-            r√§tt = true;
+            r‰tt = true;
         } else {
             System.out.println(rad + " " + kolumn + "false");
-            r√§tt = false;
+            r‰tt = false;
         }
-        return r√§tt;
+        return r‰tt;
     }
     
     public void actionPerformed(ActionEvent e){
@@ -104,22 +104,22 @@ public class GUIquiz extends JFrame implements ActionListener {
             }
         }
         
-        boolean r√§ttknapp = r√§ttellerfel(r, k);
+        boolean r‰ttknapp = r‰ttellerfel(r, k);
         
-        if(r√§ttknapp == true){
+        if(r‰ttknapp == true){
             bArray[r][k].setBackground(Color.green);
         }
-        if(r√§ttknapp == false){
+        if(r‰ttknapp == false){
             System.out.println(r + " " + k);
             bArray[r][k].setBackground(Color.red);
-            bArray[r√§ttr][r√§ttk].setBackground(Color.green);
+            bArray[r‰ttr][r‰ttk].setBackground(Color.green);
             
         }
         
         revalidate();
         repaint();
         
-        JOptionPane.showMessageDialog(null, "Slutet p√• [Svara p√• fr√•ga] demo");
+        JOptionPane.showMessageDialog(null, "Slutet pÂ [Svara pÂ frÂga] demo");
         System.exit(0);
         
     }
