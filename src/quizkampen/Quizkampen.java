@@ -11,7 +11,9 @@ public class Quizkampen {
 
     public static void main(String[] args) {
         
-        JOptionPane.showMessageDialog(null, "Ser ni mig?");
+        String s = JOptionPane.showInputDialog(null, "Ser ni mig?");
+        JOptionPane.showMessageDialog(s);
+        
     }
     
 }
