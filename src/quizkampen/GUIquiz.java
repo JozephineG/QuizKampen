@@ -1,38 +1,47 @@
 
 package quizkampen;
 
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.*;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 
 public class GUIquiz extends JFrame implements ActionListener {
-    
+
     JPanel spelyta = new JPanel();
     JPanel knappyta = new JPanel();
-    JLabel frÂga = new JLabel("", SwingConstants.CENTER);
+    JLabel fr√•ga = new JLabel("", SwingConstants.CENTER);
     
     JButton[][] bArray = new JButton[2][2];
     
-    int[] frÂgarray = {1, 2, 3, 4};
+    Fr√•ga[] fr√•garray = new Fr√•ga[2];
     
     int r;
     int k;
-    int r‰ttr;
-    int r‰ttk;
+    int r√§ttr;
+    int r√§ttk;
+    int n;
     
+    Databas d = new Databas();
+    Kategori kat = new Kategori();
     
     public GUIquiz(){
         
+        
         add(spelyta);
         spelyta.setLayout(new GridLayout(2, 1));
-        frÂga.setText("Fˆrsta bokstaven i alfabetet?");
-        frÂga.setFont(new Font("Serif", Font.BOLD, 18));
-        spelyta.add(frÂga);
+        fr√•ga.setFont(new Font("Serif", Font.BOLD, 18));
+        spelyta.add(fr√•ga);
         spelyta.add(knappyta);
         knappyta.setLayout(new GridLayout(2, 2));
         
@@ -44,50 +53,45 @@ public class GUIquiz extends JFrame implements ActionListener {
             }
         }
         
-        bArray[0][0].setText("A");
-        bArray[0][1].setText("B");
-        bArray[1][0].setText("C");
-        bArray[1][1].setText("D");
+        List <Fr√•ga> tworandque = d.getQuestionFromCat(kat.getValdKat());
+        fr√•garray[0] = tworandque.get(0);
+        fr√•garray[1] = tworandque.get(1);
+        
+        
+        fr√•ga.setText(fr√•garray[n].getQuestion());
+        bArray[0][0].setText(fr√•garray[0].getAnswerA());
+        bArray[0][1].setText(fr√•garray[0].getAnswerB());
+        bArray[1][0].setText(fr√•garray[0].getAnswerC());
+        bArray[1][1].setText(fr√•garray[0].getAnswerD());
         
         
         setLocation(700, 100);
         setSize(500, 500);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+       
         
         
     }
     
-    public boolean r‰ttellerfel(int rad, int kolumn){
+    public boolean r√§ttellerfel(int rad, int kolumn){
         
-        boolean r‰tt = false;
-        r‰ttr = 2;
-        r‰ttk = 2;
+        boolean r√§tt = false;
+        r√§ttr = 2;
+        r√§ttk = 2;
         
-        switch (frÂgarray[0]) {
-            case 1: r‰ttr = 0;
-                    r‰ttk = 0;
-                    break;
-            case 2: r‰ttr = 1;
-                    r‰ttk = 1;
-                    break;
-            case 3: r‰ttr = 0;
-                    r‰ttk = 1;
-                    break;
-            case 4: r‰ttr = 1;
-                    r‰ttk = 0;
-                    break;
-        }
+        r√§ttr = fr√•garray[n].getR();
+        r√§ttk = fr√•garray[n].getK();             
                      
-                     
-        if(rad == r‰ttr && kolumn == r‰ttk){
+        if(rad == r√§ttr && kolumn == r√§ttk){
             System.out.println(rad + " " + kolumn + "true");
-            r‰tt = true;
+            r√§tt = true;
         } else {
             System.out.println(rad + " " + kolumn + "false");
-            r‰tt = false;
+            r√§tt = false;
         }
-        return r‰tt;
+        
+        return r√§tt;
     }
     
     public void actionPerformed(ActionEvent e){
@@ -104,25 +108,43 @@ public class GUIquiz extends JFrame implements ActionListener {
             }
         }
         
-        boolean r‰ttknapp = r‰ttellerfel(r, k);
+        boolean r√§ttknapp = r√§ttellerfel(r, k);
         
-        if(r‰ttknapp == true){
+        if(r√§ttknapp == true){
             bArray[r][k].setBackground(Color.green);
         }
-        if(r‰ttknapp == false){
+        if(r√§ttknapp == false){
             System.out.println(r + " " + k);
             bArray[r][k].setBackground(Color.red);
-            bArray[r‰ttr][r‰ttk].setBackground(Color.green);
-            
+            bArray[r√§ttr][r√§ttk].setBackground(Color.green);  
         }
+        
+        ++n;
+        
+        if(n < 2){
+            JOptionPane.showMessageDialog(null, "Till n√§sta fr√•ga");
+        }
+        if(n == 2){
+            JOptionPane.showMessageDialog(null, "Klar");
+            System.exit(0);
+        }
+        
+        bArray[0][0].setBackground(null);
+        bArray[0][1].setBackground(null);
+        bArray[1][0].setBackground(null);
+        bArray[1][1].setBackground(null);
+        
+        fr√•ga.setText(fr√•garray[n].getQuestion());
+        bArray[0][0].setText(fr√•garray[n].getAnswerA());
+        bArray[0][1].setText(fr√•garray[n].getAnswerB());
+        bArray[1][0].setText(fr√•garray[n].getAnswerC());
+        bArray[1][1].setText(fr√•garray[n].getAnswerD());
         
         revalidate();
         repaint();
         
-        JOptionPane.showMessageDialog(null, "Slutet pÂ [Svara pÂ frÂga] demo");
-        System.exit(0);
+        
         
     }
-    
     
 }

@@ -115,4 +115,3 @@ public class Kategori extends JFrame implements ActionListener {
     
 }
 
-
