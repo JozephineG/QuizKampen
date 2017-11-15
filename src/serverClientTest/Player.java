@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class Player extends Thread {
+public class Player {
 	
 	private int id;
 	
@@ -27,7 +27,6 @@ public class Player extends Thread {
 		setupOutputStream();
 		setupInputStream();
 		runThreads();
-		this.start();
 	}
 	
 	private void setupOutputStream() {

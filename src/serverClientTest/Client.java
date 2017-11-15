@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Client extends Thread {
+public class Client {
 	
 	private int port = 1337;
 	private String ip = "127.0.0.1";
@@ -27,8 +27,6 @@ public class Client extends Thread {
 		setupOutputStream();
 		setupInputStream();
 		runThreads();
-		this.start();
-		
 	}
 	
 
