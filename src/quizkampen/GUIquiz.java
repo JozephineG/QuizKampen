@@ -33,6 +33,7 @@ public class GUIquiz extends JFrame implements ActionListener {
     int n;
     
     Databas d = new Databas();
+    Kategori kat = new Kategori();
     
     public GUIquiz(){
         
@@ -52,7 +53,7 @@ public class GUIquiz extends JFrame implements ActionListener {
             }
         }
         
-        List <Fråga> tworandque = d.getQuestionFromCat("2000-talet");
+        List <Fråga> tworandque = d.getQuestionFromCat(kat.getValdKat());
         frågarray[0] = tworandque.get(0);
         frågarray[1] = tworandque.get(1);
         

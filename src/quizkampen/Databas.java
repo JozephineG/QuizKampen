@@ -50,9 +50,9 @@ public class Databas {
         
         ArrayList <Fråga> QFC = new ArrayList<>();
         
-        n = n.toLowerCase().trim();
+        n = n.toLowerCase();
         
-        if(n.matches("sportochfritid")){
+        if(n.matches("sport & fritid")){
             QFC.add(f1);
             QFC.add(f2);
             QFC.add(f3);
@@ -64,13 +64,13 @@ public class Databas {
             QFC.add(f7);
             QFC.add(f5);
             Collections.shuffle(QFC);
-        } else if(n.matches("troochskrock")){
+        } else if(n.matches("tro & skrock")){
             QFC.add(f9);
             QFC.add(f10);
             QFC.add(f11);
             QFC.add(f12);
             Collections.shuffle(QFC);
-        } else if(n.matches("jordenrunt")){
+        } else if(n.matches("jorden runt")){
             QFC.add(f13);
             QFC.add(f14);
             QFC.add(f15);
