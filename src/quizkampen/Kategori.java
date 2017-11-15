@@ -1,4 +1,6 @@
-package quizkampen;import javax.swing.*;
+package quizkampen;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,12 +20,14 @@ public class Kategori extends JFrame implements ActionListener {
 
     private List<JButton> category = new ArrayList<>();
 
-    JButton c1 = new JButton("Sport & Fritid");
-    JButton c2 = new JButton("2000-talet");
-    JButton c3 = new JButton("Tro & Skrock");
-    JButton c4 = new JButton("Jorden runt");
-    JButton c5 = new JButton("Geografi");
-    JButton c6 = new JButton("Historia");
+    private JButton c1 = new JButton("Sport & Fritid");
+    private JButton c2 = new JButton("2000-talet");
+    private JButton c3 = new JButton("Tro & Skrock");
+    private JButton c4 = new JButton("Jorden runt");
+    private JButton c5 = new JButton("Geografi");
+    private JButton c6 = new JButton("Historia");
+    
+    private String valdKat = "";
 
     public Kategori() {
 
@@ -33,6 +37,13 @@ public class Kategori extends JFrame implements ActionListener {
         category.add(c4);
         category.add(c5);
         category.add(c6);
+        
+        c1.addActionListener(this);
+        c2.addActionListener(this);
+        c3.addActionListener(this);
+        c4.addActionListener(this);
+        c5.addActionListener(this);
+        c6.addActionListener(this);
 
         kategori.addActionListener(this);
         panel.setLayout(new GridLayout(3, 1));
@@ -48,6 +59,10 @@ public class Kategori extends JFrame implements ActionListener {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+    }
+    
+    public String getValdKat(){
+        return valdKat;
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -68,13 +83,36 @@ public class Kategori extends JFrame implements ActionListener {
             panel.revalidate();
             panel.repaint();
         }
+        
+        if (e.getSource() == c1) {
+            valdKat = c1.getText();
+            System.out.println("Fick:" + valdKat);
+            
+        }
+        if (e.getSource() == c2) {
+            valdKat = c2.getText();
+            System.out.println("Fick:" + valdKat);
+        }
+        if (e.getSource() == c3) {
+            valdKat = c3.getText();
+            System.out.println("Fick:" + valdKat);
+        }
+        if (e.getSource() == c4) {
+            valdKat = c4.getText();
+            System.out.println("Fick:" + valdKat);
+        }
+        if (e.getSource() == c5) {
+            valdKat = c5.getText();
+            System.out.println("Fick:" + valdKat);
+        }
+        if (e.getSource() == c6) {
+            valdKat = c6.getText();
+            System.out.println("Fick:" + valdKat);
+        }
+        
     }
 
-    public static void main(String[] arg) {
-
-        Kategori k = new Kategori();
-
-
-    }
+    
 }
+
 
