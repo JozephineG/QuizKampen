@@ -1,4 +1,4 @@
-package serverClientTest;
+package server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,41 +6,27 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
-public class Client {
+public class Player {
 	
-	private int port = 1337;
-	private String ip = "127.0.0.1";
+	private int id;
 	
-	private Socket socket;
-	
-	private ObjectOutputStream out; 
+	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	
 	private BufferedReader inKonsol = new BufferedReader(new InputStreamReader(System.in));
-	private String tempOut;
 	
-	Client(){
+	private Socket socket;
+	String tempOut;
+	
+	Player(Socket socket, int id){
 		
-		setupConnection();
+		this.socket = socket;
+		this.id = id;
+		
 		setupOutputStream();
 		setupInputStream();
 		runThreads();
-	}
-	
-
-	private void setupConnection() {
-		
-		try {
-			socket = new Socket(ip, port);
-		} catch (UnknownHostException e) {
-			System.out.println("Kunde inte hitta ip/server");
-		} catch (IOException e) {
-			System.out.println("Fail med koppling");
-		}
-		
-		System.out.println("Kopplades till server...");
 	}
 	
 	private void setupOutputStream() {
@@ -48,20 +34,23 @@ public class Client {
 		try {
 			out = new ObjectOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
-			System.out.println("Kunde inte skapa outputStream");
-			e.printStackTrace();
+			System.out.println("Kunde inte sätta upp OutputStream...");
+			
 		}
+		
 	}
-
+	
 	private void setupInputStream() {
 		
 		try {
 			in = new ObjectInputStream(socket.getInputStream());
 		} catch (IOException e) {
-			System.out.println("Kunde inte sätta upp inputStream");
+			System.out.println("Kunde inte skapa inputStream");
 		}
 	}
 	
+	
+
 	private void runThreads() {
 		
 		Thread inThread = new Thread(new Runnable() {
@@ -70,45 +59,39 @@ public class Client {
 			public void run() {
 				
 				while(true) {
+					
 					try {
 						System.out.println(in.readObject());
 					} catch (ClassNotFoundException e) {
-						System.out.println("ClassNotFound");
+						System.out.println("Problem att läsa in objekt...");
 					} catch (IOException e) {
 						System.out.println("Koppling bröts...");
-						e.printStackTrace();
 						break;
 					}
+
 				}
 			}
 			
 		});
 		inThread.start();
 		
-		Thread outputThread = new Thread(new Runnable() {
+		Thread outThread = new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 				
-				while(true) {
+				while (true) {
+					
 					try {
 						tempOut = inKonsol.readLine();
 						out.writeObject(tempOut); out.flush();
 					} catch (IOException e) {
-						System.out.println("Kunde inte sätta upp outputStream...");
+						System.out.println("Kunde inte läsa in från konsolen...");
 					}
-					
 				}
 			}
-			
 		});
-		outputThread.start();
-	}
-	
-	public static void main(String[] args) {
-		
-		Client client1 = new Client();
+		outThread.start();
 		
 	}
-
 }
