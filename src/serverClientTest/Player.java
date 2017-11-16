@@ -27,6 +27,7 @@ public class Player {
 		setupOutputStream();
 		setupInputStream();
 		runThreads();
+		new GUItest();
 	}
 	
 	private void setupOutputStream() {
@@ -92,5 +93,6 @@ public class Player {
 			}
 		});
 		outThread.start();
+		
 	}
 }

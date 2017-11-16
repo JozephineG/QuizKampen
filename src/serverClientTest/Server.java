@@ -12,31 +12,33 @@ public class Server {
 	
 	Server(){
 		
+		try {
+			listener = new ServerSocket(port);
+		} catch (IOException e) {
+			System.out.println("Could not create ServerSocket...");
+		}
 		setupConnection();
 	}
 	
 	private void setupConnection() {
 		
 		try {
-			listener = new ServerSocket(port);
 			while(true) {
-				
-			System.out.println("Väntar på att kopplas till klient...");
-			connection = listener.accept();
-			Player p1 = new Player(connection, 1);
-			System.out.println("Kopplades till klient " + connection.getInetAddress().getHostAddress());
-			
-			
+				System.out.println("Waiting to connect to first client...");
+				connection = listener.accept();
+				Player p1 = new Player(connection, 1);
+				System.out.println("Player 1 connected: " + connection.getInetAddress().getHostName());
+				System.out.println("Waiting to connect to second client...");
+				connection = listener.accept();
+				Player p2 = new Player(connection, 2);
+				System.out.println("Player 2 connected: " + connection.getInetAddress().getHostName());
 			}
 		} catch (IOException e) {
-			System.out.println("Fel med att koppla upp mot klient");
+			System.out.println("Unable to connect to client...");
 		}
-		
 	}
-	
 
 	public static void main(String[] args) {
-
 		
 		new Server();
 	}
