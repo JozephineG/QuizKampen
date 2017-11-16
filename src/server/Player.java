@@ -27,6 +27,9 @@ public class Player {
 		setupOutputStream();
 		setupInputStream();
 		runThreads();
+		
+		//Kevin testar elipse, WOOH
+		//Och ännu en kommentar
 	}
 	
 	private void setupOutputStream() {
