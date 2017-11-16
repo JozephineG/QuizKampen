@@ -14,7 +14,7 @@ public class IOobjekt {
 		System.out.println(kategori);
 		
 		
-	}
+	}//hej
 	
 	public void plusPoint() { //varje gång man svarar rätt så kalla denna
 		point++;
