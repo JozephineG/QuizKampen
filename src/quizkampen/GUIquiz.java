@@ -111,11 +111,33 @@ public class GUIquiz implements ActionListener {
             }
         }
         
-        if(next == 1){
+        
+        fråga.setText("");
+        bArray[0][0].setText("");
+        bArray[0][1].setText("");
+        bArray[1][0].setText("");
+        bArray[1][1].setText("");
+        
+       
+        
+        
+        
+        questionframe.setLocation(700, 100);
+        questionframe.setSize(500, 500);
+        questionframe.setVisible(false);
+        questionframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+       
+        
+        }
+        
+    public void getQueData(){
+        
         List <Fråga> tworandque = d.getQuestionFromCat(valdKat);
         frågarray[0] = tworandque.get(0);
         frågarray[1] = tworandque.get(1);
         
+        System.out.println("Hej 2");
         
         fråga.setText(frågarray[n].getQuestion());
         bArray[0][0].setText(frågarray[0].getAnswerA());
@@ -124,23 +146,16 @@ public class GUIquiz implements ActionListener {
         bArray[1][1].setText(frågarray[0].getAnswerD());
         
         
-        questionframe.setLocation(700, 100);
-        questionframe.setSize(500, 500);
-        questionframe.setVisible(false);
-        questionframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-        ++next;
-        
-        }
-        
-        
-    }
+    }    
+    
     
     public boolean rättellerfel(int rad, int kolumn){
         
         boolean rätt = false;
         rättr = 2;
         rättk = 2;
+        
+        System.out.println("Hej 2");
         
         rättr = frågarray[n].getR();
         rättk = frågarray[n].getK();             
@@ -164,11 +179,15 @@ public class GUIquiz implements ActionListener {
         
     }
     
+    public void chooseAndLook(){
+        
+        
+    } 
     
     
     public void actionPerformed(ActionEvent e){
         
-        if(next == 1){
+        if(next >= 1){
         JButton vald = (JButton) e.getSource();
         for(int m = 0; m < bArray.length; m++){
             for(int n = 0; n < bArray[m].length; n++){
@@ -179,6 +198,7 @@ public class GUIquiz implements ActionListener {
                 } 
             }
         }
+        next = 2;
         }
         
         Collections.shuffle(category);
@@ -201,29 +221,36 @@ public class GUIquiz implements ActionListener {
         if (e.getSource() == c1) {
             valdKat = c1.getText();
             nextFrame();
+            getQueData();
         }
         if (e.getSource() == c2) {
             valdKat = c2.getText();
             nextFrame();
+            getQueData();
         }
         if (e.getSource() == c3) {
             valdKat = c3.getText();
             nextFrame();
+            getQueData();
         }
         if (e.getSource() == c4) {
             valdKat = c4.getText();
             nextFrame();
+            getQueData();
         }
         if (e.getSource() == c5) {
             valdKat = c5.getText();
             nextFrame();
+            getQueData();
         }
         if (e.getSource() == c6) {
             valdKat = c6.getText();
             nextFrame();
+            getQueData();
         }
-        
+        System.out.println("tjena");
         if(next == 2){
+            System.out.println("LOLOLOLOL");
         boolean rättknapp = rättellerfel(r, k);
         
         if(rättknapp == true){
