@@ -13,7 +13,6 @@ public class Server {
 	Server(){
 		
 		setupConnection();
-		
 	}
 	
 	private void setupConnection() {
