@@ -12,7 +12,6 @@ public class Server {
 	
 	Server(){
 		
-		
 		setupConnection();
 		
 	}
