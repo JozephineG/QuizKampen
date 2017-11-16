@@ -37,7 +37,6 @@ public class Player {
 			System.out.println("Kunde inte sätta upp OutputStream...");
 			
 		}
-		
 	}
 	
 	private void setupInputStream() {
