@@ -1,4 +1,4 @@
-package quizkampen;
+/*package quizkampen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by joacim on 2017-11-13.
- */
+
+//Created by joacim on 2017-11-13.
+ 
 public class Kategori extends JFrame implements ActionListener {
 
     private JPanel panel = new JPanel(new BorderLayout());
@@ -27,10 +27,13 @@ public class Kategori extends JFrame implements ActionListener {
     private JButton c5 = new JButton("Geografi");
     private JButton c6 = new JButton("Historia");
     
-    private String valdKat = "";
+    
+    
 
     public Kategori() {
-
+        
+        
+        
         category.add(c1);
         category.add(c2);
         category.add(c3);
@@ -64,7 +67,7 @@ public class Kategori extends JFrame implements ActionListener {
     public String getValdKat(){
         return valdKat;
     }
-
+    
     public void actionPerformed(ActionEvent e) {
 
         Collections.shuffle(category);
@@ -87,7 +90,6 @@ public class Kategori extends JFrame implements ActionListener {
         if (e.getSource() == c1) {
             valdKat = c1.getText();
             System.out.println("Fick:" + valdKat);
-            
         }
         if (e.getSource() == c2) {
             valdKat = c2.getText();
@@ -114,4 +116,4 @@ public class Kategori extends JFrame implements ActionListener {
 
     
 }
-
+*/

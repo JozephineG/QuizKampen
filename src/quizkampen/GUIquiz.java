@@ -1,11 +1,14 @@
 
 package quizkampen;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,8 +19,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 
-public class GUIquiz extends JFrame implements ActionListener {
-
+public class GUIquiz implements ActionListener {
+    
+    //Frågeruta
+    JFrame questionframe = new JFrame("Frågeruta");
     JPanel spelyta = new JPanel();
     JPanel knappyta = new JPanel();
     JLabel fråga = new JLabel("", SwingConstants.CENTER);
@@ -31,14 +36,67 @@ public class GUIquiz extends JFrame implements ActionListener {
     int rättr;
     int rättk;
     int n;
+    String vald;
     
     Databas d = new Databas();
-    Kategori kat = new Kategori();
+    
+    
+    //kategori
+    JFrame kategoriframe = new JFrame();
+    
+    private JPanel panel = new JPanel(new BorderLayout());
+    private JPanel panel2 = new JPanel(new BorderLayout());
+    private JButton kategori = new JButton("Klicka för kategori");
+
+
+    private List<JButton> category = new ArrayList<>();
+
+    private JButton c1 = new JButton("Sport & Fritid");
+    private JButton c2 = new JButton("2000-talet");
+    private JButton c3 = new JButton("Tro & Skrock");
+    private JButton c4 = new JButton("Jorden runt");
+    private JButton c5 = new JButton("Geografi");
+    private JButton c6 = new JButton("Historia");
+    
+    String valdKat;
+    int next = 0;
     
     public GUIquiz(){
         
         
-        add(spelyta);
+        // Kategori
+        category.add(c1);
+        category.add(c2);
+        category.add(c3);
+        category.add(c4);
+        category.add(c5);
+        category.add(c6);
+        
+        c1.addActionListener(this);
+        c2.addActionListener(this);
+        c3.addActionListener(this);
+        c4.addActionListener(this);
+        c5.addActionListener(this);
+        c6.addActionListener(this);
+
+        kategori.addActionListener(this);
+        panel.setLayout(new GridLayout(3, 1));
+        panel2.setLayout(new BorderLayout());
+        panel2.add(kategori);
+
+        kategoriframe.add(panel2);
+        kategoriframe.add(panel);
+
+        kategoriframe.setLayout(new GridLayout());
+        kategoriframe.setSize(500, 500);
+        kategoriframe.setLocation(700, 100);
+        kategoriframe.setVisible(true);
+        kategoriframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        
+        //Frågeruta
+        
+        questionframe.add(spelyta);
         spelyta.setLayout(new GridLayout(2, 1));
         fråga.setFont(new Font("Serif", Font.BOLD, 18));
         spelyta.add(fråga);
@@ -53,7 +111,8 @@ public class GUIquiz extends JFrame implements ActionListener {
             }
         }
         
-        List <Fråga> tworandque = d.getQuestionFromCat(kat.getValdKat());
+        if(next == 1){
+        List <Fråga> tworandque = d.getQuestionFromCat(valdKat);
         frågarray[0] = tworandque.get(0);
         frågarray[1] = tworandque.get(1);
         
@@ -65,11 +124,14 @@ public class GUIquiz extends JFrame implements ActionListener {
         bArray[1][1].setText(frågarray[0].getAnswerD());
         
         
-        setLocation(700, 100);
-        setSize(500, 500);
-        setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-       
+        questionframe.setLocation(700, 100);
+        questionframe.setSize(500, 500);
+        questionframe.setVisible(false);
+        questionframe.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        ++next;
+        
+        }
         
         
     }
@@ -94,9 +156,19 @@ public class GUIquiz extends JFrame implements ActionListener {
         return rätt;
     }
     
+    public void nextFrame(){
+        
+        kategoriframe.setVisible(false);
+        questionframe.setVisible(true);
+        next = 1;
+        
+    }
+    
+    
+    
     public void actionPerformed(ActionEvent e){
         
-        
+        if(next == 1){
         JButton vald = (JButton) e.getSource();
         for(int m = 0; m < bArray.length; m++){
             for(int n = 0; n < bArray[m].length; n++){
@@ -107,7 +179,51 @@ public class GUIquiz extends JFrame implements ActionListener {
                 } 
             }
         }
+        }
         
+        Collections.shuffle(category);
+        List<JButton> shuffleCategory = new ArrayList<>(category.subList(0, 3));
+
+
+        if (e.getSource() == kategori) {
+
+            panel.removeAll();
+
+            for (JButton b : shuffleCategory) {
+
+                panel.add(b);
+            }
+
+            panel.revalidate();
+            panel.repaint();
+        }
+        
+        if (e.getSource() == c1) {
+            valdKat = c1.getText();
+            nextFrame();
+        }
+        if (e.getSource() == c2) {
+            valdKat = c2.getText();
+            nextFrame();
+        }
+        if (e.getSource() == c3) {
+            valdKat = c3.getText();
+            nextFrame();
+        }
+        if (e.getSource() == c4) {
+            valdKat = c4.getText();
+            nextFrame();
+        }
+        if (e.getSource() == c5) {
+            valdKat = c5.getText();
+            nextFrame();
+        }
+        if (e.getSource() == c6) {
+            valdKat = c6.getText();
+            nextFrame();
+        }
+        
+        if(next == 2){
         boolean rättknapp = rättellerfel(r, k);
         
         if(rättknapp == true){
@@ -140,11 +256,18 @@ public class GUIquiz extends JFrame implements ActionListener {
         bArray[1][0].setText(frågarray[n].getAnswerC());
         bArray[1][1].setText(frågarray[n].getAnswerD());
         
-        revalidate();
-        repaint();
         
+        }
         
+        questionframe.revalidate();
+        questionframe.repaint();
         
     }
+      
     
 }
+    
+   
+   
+    
+    
