@@ -30,6 +30,7 @@ public class Player {
 		
 		//Kevin testar elipse, WOOH
 		//Och ännu en kommentar
+		//Skrver något
 	}
 	
 	private void setupOutputStream() {
