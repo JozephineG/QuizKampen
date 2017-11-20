@@ -34,7 +34,7 @@ public class Player {
 		try {
 			out = new ObjectOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
-			System.out.println("Kunde inte sätta upp OutputStream...");
+			System.out.println("Kunde inte sï¿½tta upp OutputStream...");
 			
 		}
 	}
@@ -49,7 +49,7 @@ public class Player {
 	}
 	
 	
-
+//Tja
 	private void runThreads() {
 		
 		Thread inThread = new Thread(new Runnable() {
@@ -62,9 +62,9 @@ public class Player {
 					try {
 						System.out.println(in.readObject());
 					} catch (ClassNotFoundException e) {
-						System.out.println("Problem att läsa in objekt...");
+						System.out.println("Problem att lï¿½sa in objekt...");
 					} catch (IOException e) {
-						System.out.println("Koppling bröts...");
+						System.out.println("Koppling brï¿½ts...");
 						break;
 					}
 
@@ -85,7 +85,7 @@ public class Player {
 						tempOut = inKonsol.readLine();
 						out.writeObject(tempOut); out.flush();
 					} catch (IOException e) {
-						System.out.println("Kunde inte läsa in från konsolen...");
+						System.out.println("Kunde inte lï¿½sa in frï¿½n konsolen...");
 					}
 				}
 			}
